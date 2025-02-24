@@ -9,6 +9,7 @@ return {
       "comment",
       "completion",
       "files",
+      "icons",
       "jump",
       "jump2d",
       "pairs",
