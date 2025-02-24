@@ -59,15 +59,15 @@ opt.listchars    = {    -- see `:help list` and `:help 'listchars'`
 -- opt.shellredir   = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
 -- opt.shellpipe    = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
 
-opt.shell = "pwsh"
+opt.shell        = "pwsh"
 opt.shellcmdflag = table.concat({
   '-NoLogo',
   '-NonInteractive',
-  '-ConfigurationFile "C:/users/u55398/.config/nvim/nvim.pssc"',
+  '-ConfigurationFile "C:/ProgramData/config/nvim.pssc"',
   '-ExecutionPolicy RemoteSigned',
   '-Command'
 }, ' ')
-opt.shellquote = ''
-opt.shellxquote = ''
-opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s'
-opt.shellpipe  = '2>&1 | Out-File -Encoding UTF8 %s'
+opt.shellquote   = ''
+opt.shellxquote  = ''
+opt.shellredir   = '2>&1 | Out-File -Encoding UTF8 %s'
+opt.shellpipe    = '2>&1 | Out-File -Encoding UTF8 %s'
