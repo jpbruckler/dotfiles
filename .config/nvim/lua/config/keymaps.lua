@@ -23,6 +23,11 @@ vim.keymap.set("n", "<leader>ep", function()
   }
 end)
 
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("v", "<space>x", ":lua<CR>")
 
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 -- Neotree
-vim.keymap.set("n", '<C-b>', ':Neotree toggle<CR>', { desc = 'Toggles Neotree' })
+-- vim.keymap.set("n", '<C-b>', ':Neotree toggle<CR>', { desc = 'Toggles Neotree' })
