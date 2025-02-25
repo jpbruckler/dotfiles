@@ -47,16 +47,18 @@ opt.listchars    = {   -- see `:help list` and `:help 'listchars'`
   nbsp = '␣'
 }
 
-local homePath   = vim.env.HOME
-opt.shell        = "pwsh"
-opt.shellcmdflag = table.concat({
-  '-NoLogo',
-  '-NonInteractive',
-  '-ConfigurationFile "' .. homePath .. '/.config/nvim/nvim.pssc"',
-  '-ExecutionPolicy RemoteSigned',
-  '-Command'
-}, ' ')
-opt.shellquote   = ''
-opt.shellxquote  = ''
-opt.shellredir   = '2>&1 | Out-File -Encoding UTF8 %s'
-opt.shellpipe    = '2>&1 | Out-File -Encoding UTF8 %s'
+if package.config:sub(1,1) == '\\' then
+  local homePath   = vim.env.HOME
+  opt.shell        = "pwsh"
+  opt.shellcmdflag = table.concat({
+    '-NoLogo',
+    '-NonInteractive',
+    '-ConfigurationFile "' .. homePath .. '/.config/nvim/nvim.pssc"',
+    '-ExecutionPolicy RemoteSigned',
+    '-Command'
+  }, ' ')
+  opt.shellquote   = ''
+  opt.shellxquote  = ''
+  opt.shellredir   = '2>&1 | Out-File -Encoding UTF8 %s'
+  opt.shellpipe    = '2>&1 | Out-File -Encoding UTF8 %s'
+end
