@@ -77,9 +77,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- File picker and grep open files
-vim.keymap.set("n", "<C-T>", ":Pick files<CR>")
-vim.keymap.set("n", "<C-P>", ":Pick grep_live<CR>")
 
 -- [[ Mini Keymaps ]]
 vim.keymap.set("n", "<BS>", ":lua MiniTrailspace.trim()<CR>")
