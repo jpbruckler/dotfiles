@@ -1,8 +1,0 @@
-[user]
-	name = John Bruckler
-	email = jpbruckler@gmail.com
-[credential]
-	helper = 
-	helper = /usr/bin/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
