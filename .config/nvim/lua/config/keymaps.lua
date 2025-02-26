@@ -142,3 +142,6 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 vim.keymap.set("n", "<leader>P", function()
 	require("powershell").toggle_term()
 end)
+
+-- Noice
+vim.api.nvim_set_keymap("n", "<leader>nn", ":Noice dismiss<CR>", { noremap = true })
