@@ -69,19 +69,29 @@ return {
 					},
 				},
 			},
-			powershell_es = {
-				bundle_path = homePath .. "/.config/nvim/customlsp",
+			--[[
+            powershell_es = {
+				-- Use Mason path
+				bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+				filetypes = { "ps1", "psm1", "psd1" },
 				on_attach = function(client, bufnr)
 					vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 				end,
+				init_options = {
+					enableProfileLoading = false,
+				},
+				cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "c:/PSES/Start-EditorServices.ps1 ..." },
 				settings = {
 					powershell = {
 						codeFormatting = {
-							Preset = "OTBS",
+							Preset = "Stroustrup",
+						},
+						PipelineIndentation = {
+							Style = "IncreaseIndentationForFirstPipeline",
 						},
 					},
 				},
-			},
+			},]]
 		}
 
 		-- Ensure servers and tools are installed
