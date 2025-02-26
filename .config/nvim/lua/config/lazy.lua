@@ -34,4 +34,12 @@ require("lazy").setup({
 	checker = { enabled = true },
 	"tpope/vim-fugitive",
 	"preservim/vim-pencil",
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
 })
