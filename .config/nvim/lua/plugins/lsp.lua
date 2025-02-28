@@ -69,7 +69,6 @@ return {
 					},
 				},
 			},
-			--[[
             powershell_es = {
 				-- Use Mason path
 				bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
@@ -80,7 +79,7 @@ return {
 				init_options = {
 					enableProfileLoading = false,
 				},
-				cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "c:/PSES/Start-EditorServices.ps1 ..." },
+				cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1 ..." },
 				settings = {
 					powershell = {
 						codeFormatting = {
@@ -91,7 +90,7 @@ return {
 						},
 					},
 				},
-			},]]
+			},
 		}
 
 		-- Ensure servers and tools are installed

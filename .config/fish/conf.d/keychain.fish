@@ -1,5 +1,4 @@
-if status is-login
-  and status is-interactive
+if status is-interactive
   # to add a key:
   # set -Ua SSH_KEYS_TO_AUTOLOAD keypath
   # to remove a key:
