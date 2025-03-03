@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 -- Numbers
 vim.wo.number = true
 vim.o.relativenumber = true
@@ -14,6 +15,29 @@ vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.expandtab = true
 
+-- save undo history
+vim.o.undofile = true
+
+-- enable breakindent
+vim.o.breakindent = true
+
+-- keep signcolumn on
+vim.wo.signcolumn = 'yes'
+
+-- decrease update times
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+-- set completeopt for better experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- enable terminal gui colors
+vim.o.termguicolors = true
+
+-- Case-insensitive searching UNLESS \C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
 -- Window splits
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -26,7 +50,8 @@ vim.o.cursorline = true
 -- that's used to set the variable $NvimShell. My PowerShell
 -- profile keys off this value to set the output encoding to
 -- plaintext when $NvimShell exists.
-if package.config:sub(1, 1) == "\\" then
+local is_windows = vim.loop.os_uname().system == 'Windows_NT'
+if is_windows then
 	local homePath = vim.env.HOME
 	vim.o.shell = "pwsh"
 	vim.o.shellcmdflag = table.concat({

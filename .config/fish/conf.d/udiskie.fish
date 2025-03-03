@@ -1,3 +1,3 @@
 if status --is-interactive
-  udiskie &
+  udiskie &;disown
 end

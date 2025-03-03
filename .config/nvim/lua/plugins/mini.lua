@@ -16,12 +16,6 @@ return {
 			-- "pick",
 			"splitjoin",
 			"statusline",
-			
-		-- Add/delete/replace surroundings (brackets, quotes, etc.)
-		--
-		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-		-- - sd'   - [S]urround [D]elete [']quotes
-		-- - sr)'  - [S]urround [R]eplace [)] [']
 			"surround",
 			"tabline",
 			"trailspace",
@@ -30,19 +24,8 @@ return {
 		for _, module in ipairs(mini_modules) do
 			require("mini." .. module).setup()
 		end
-		
-		-- Better Around/Inside textobjects
-		--
-		-- Examples:
-		--  - va)  - [V]isually select [A]round [)]paren
-		--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-		--  - ci'  - [C]hange [I]nside [']quote
 		require("mini.ai").setup({ n_lines = 500 })
 
-
-		-- Simple and easy statusline.
-		--  You could remove this setup call if you don't like it,
-		--  and try some other statusline plugin
 		local statusline = require("mini.statusline")
 		statusline.setup({ use_icons = vim.g.have_nerd_font })
 
@@ -53,5 +36,16 @@ return {
 		statusline.section_location = function()
 			return "%2l:%-2v"
 		end
+
+		-- trim with backspace
+		vim.keymap.set("n", "<BS>", ":lua MiniTrailspace.trim()<CR>")
+
+		-- minifiles
+		local minifiles_toggle = function(...)
+			if not MiniFiles.close() then
+				MiniFiles.open(...)
+			end
+		end
+		vim.keymap.set("n", "-", minifiles_toggle, { desc = "Toggle MiniFiles" })
 	end,
 }
