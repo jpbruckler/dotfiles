@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
+. "$HOME/.cargo/env"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -83,3 +83,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
+
+
+# laziness
+alias v="nvim"
+alias vc="cd ~/.config/nvim && nvim ."
