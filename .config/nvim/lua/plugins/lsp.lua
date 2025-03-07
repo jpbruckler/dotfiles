@@ -1,4 +1,54 @@
 return {
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		opts = {
+			auto_install = true,
+		},
+	},
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			local lspconfig = require("lspconfig")
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.solargraph.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.html.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.powershell_es.setup({
+				filetypes = { "ps1", "psm1", "psd1" },
+				bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+				settings = { powershell = { codeFormatting = { Preset = "OTBS" } } },
+				init_options = {
+					enableProfileLoading = false,
+				},
+			})
+
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+		end,
+	},
+}
+--[[return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		{
@@ -85,15 +135,16 @@ return {
 					"-NoProfile",
 					"-Command",
 					vim.fn.stdpath("data")
-					.. "/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1 ...",
+					.. "/mason/packages/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1",
 				},
 				settings = {
 					powershell = {
-						--[[codeFormatting = {
-							Preset = "Stroustrup",
-						},]]
-						PipelineIndentation = {
-							Style = "IncreaseIndentationForFirstPipeline",
+						codeFormatting = {
+							preset = "Custom",
+							autoCorrectAliases = true,
+							openBraceOnSameLine = true,
+							useCorrectCasing = true,
+							pipelineIndentationStyle = "IncreaseIndentationForFirstPipeline",
 						},
 					},
 				},
@@ -224,4 +275,4 @@ return {
 			end,
 		}) -- #end LspAttach autocmd
 	end,
-}
+}]]
