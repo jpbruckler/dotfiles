@@ -7,6 +7,7 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-tree/nvim-web-devicons",
     "nvim-telescope/telescope-ui-select.nvim",
+    "jonarrien/telescope-cmdline.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -155,6 +156,9 @@ return {
     local trouble = require("trouble.sources.telescope")
     -- local icons = require("config.icons")
 
+    require("telescope").load_extension("cmdline")
+    vim.api.nvim_set_keymap("n", "Q", ":Telescope cmdline<CR>", { noremap = true, desc = "Cmdline" })
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
       callback = function(ctx)
@@ -223,38 +227,38 @@ return {
           vim.cmd([[highlight TelescopeSymbolKind guifg=#61AFEF]])
 
           require("telescope.pickers")
-            .new({}, {
-              prompt_title = "Document Symbols: " .. vim.fn.fnamemodify(entry.path, ":t"),
-              finder = require("telescope.finders").new_table({
-                results = flat_symbols,
-                entry_maker = function(symbol)
-                  local kind = vim.lsp.protocol.SymbolKind[symbol.kind] or "Other"
-                  return {
-                    value = symbol,
-                    display = function(entry)
-                      local display_text = string.format("%-50s %s", entry.value.name, kind)
-                      return display_text, { { { #entry.value.name + 1, #display_text }, "TelescopeSymbolKind" } }
-                    end,
-                    ordinal = symbol.name,
-                    filename = entry.path,
-                    lnum = symbol.selectionRange.start.line + 1,
-                    col = symbol.selectionRange.start.character + 1,
-                  }
+              .new({}, {
+                prompt_title = "Document Symbols: " .. vim.fn.fnamemodify(entry.path, ":t"),
+                finder = require("telescope.finders").new_table({
+                  results = flat_symbols,
+                  entry_maker = function(symbol)
+                    local kind = vim.lsp.protocol.SymbolKind[symbol.kind] or "Other"
+                    return {
+                      value = symbol,
+                      display = function(entry)
+                        local display_text = string.format("%-50s %s", entry.value.name, kind)
+                        return display_text, { { { #entry.value.name + 1, #display_text }, "TelescopeSymbolKind" } }
+                      end,
+                      ordinal = symbol.name,
+                      filename = entry.path,
+                      lnum = symbol.selectionRange.start.line + 1,
+                      col = symbol.selectionRange.start.character + 1,
+                    }
+                  end,
+                }),
+                sorter = require("telescope.config").values.generic_sorter({}),
+                previewer = require("telescope.config").values.qflist_previewer({}),
+                attach_mappings = function(_, map)
+                  map("i", "<CR>", function(prompt_bufnr)
+                    local selection = action_state.get_selected_entry()
+                    actions.close(prompt_bufnr)
+                    vim.cmd("edit " .. selection.filename)
+                    vim.api.nvim_win_set_cursor(0, { selection.lnum, selection.col - 1 })
+                  end)
+                  return true
                 end,
-              }),
-              sorter = require("telescope.config").values.generic_sorter({}),
-              previewer = require("telescope.config").values.qflist_previewer({}),
-              attach_mappings = function(_, map)
-                map("i", "<CR>", function(prompt_bufnr)
-                  local selection = action_state.get_selected_entry()
-                  actions.close(prompt_bufnr)
-                  vim.cmd("edit " .. selection.filename)
-                  vim.api.nvim_win_set_cursor(0, { selection.lnum, selection.col - 1 })
-                end)
-                return true
-              end,
-            })
-            :find()
+              })
+              :find()
         end)
       end)
     end
@@ -376,10 +380,10 @@ return {
       },
       extensions = {
         fzf = {
-          fuzzy = true, -- false will only do exact matching
+          fuzzy = true,                   -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          override_file_sorter = true,    -- override the file sorter
+          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
         },
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),

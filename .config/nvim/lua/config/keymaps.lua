@@ -18,7 +18,7 @@ end
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save with CTRL + S" })
 
 -- save file without auto-formatting
-vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", customMerge({ des = "Save w/o autoformat"}, opts)})
+vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", customMerge({ des = "Save w/o autoformat"}, opts))
 
 -- quit file
 vim.keymap.set("n", "<C-q>", "<cmd> q <CR>", customMerge({ desc = "Quit"}, opts))
@@ -51,7 +51,7 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- Buffers
+-- Buffer
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", customMerge({ desc = "Next Buffer" }, opts))
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", customMerge({ desc = "Previous Buffer" }, opts))
 vim.keymap.set("n", "<leader>bx", ":bdelete!<CR>", customMerge({ desc = "[B]uffer Close !" }, opts))
