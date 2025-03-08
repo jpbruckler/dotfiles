@@ -1,51 +1,43 @@
-return {
-	"echasnovski/mini.nvim",
+return { 
+	'echasnovski/mini.nvim',
 	version = false,
 	config = function()
-		local mini_modules = {
-			"ai",
-			"basics",
-			"bracketed",
-			"comment",
-			"completion",
-			"files",
-			"icons",
-			"jump",
-			"notify",
-			"pairs",
-			-- "pick",
-			"splitjoin",
-			"statusline",
-			"surround",
-			"tabline",
-			"trailspace",
-		}
+    local mini_specs = {
+      'basics',
+      'icons',
+      'notify',
+      'statusline',
+      'trailspace',
+    }
+    for _, spec in pairs(mini_specs) do
+      require('mini.' .. spec).setup()
+    end
 
-		for _, module in ipairs(mini_modules) do
-			require("mini." .. module).setup()
-		end
-		require("mini.ai").setup({ n_lines = 500 })
+    require('mini.statusline').setup({
+      use_icons = true,
+    })
+		
+    require('mini.basics').setup({
+			options = {
+				extra_ui = true,
+			},
+			mappings = {
+				windows = true,
+				move_with_alt = true,
+			},
+		})
 
-		local statusline = require("mini.statusline")
-		statusline.setup({ use_icons = vim.g.have_nerd_font })
-
-		-- You can configure sections in the statusline by overriding their
-		-- default behavior. For example, here we set the section for
-		-- cursor location to LINE:COLUMN
-		---@diagnostic disable-next-line: duplicate-set-field
-		statusline.section_location = function()
-			return "%2l:%-2v"
-		end
-
-		-- trim with backspace
-		vim.keymap.set("n", "<BS>", ":lua MiniTrailspace.trim()<CR>")
-
-		-- minifiles
+    -- minifiles
 		local minifiles_toggle = function(...)
 			if not MiniFiles.close() then
 				MiniFiles.open(...)
 			end
 		end
-		vim.keymap.set("n", "-", minifiles_toggle, { desc = "Toggle MiniFiles" })
-	end,
+    require('mini.files').setup({
+      vim.keymap.set('n', '-', minifiles_toggle, { desc = "Toggle Minifiles" })
+    })
+    
+    -- trim with backspace
+		vim.keymap.set("n", "<BS>", ":lua MiniTrailspace.trim()<CR>")
+	end
 }
