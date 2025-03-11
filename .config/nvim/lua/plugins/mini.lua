@@ -4,6 +4,7 @@ return {
   config = function()
     local mini_specs = {
       'basics',
+      'extra',
       'icons',
       'notify',
       'pick',
@@ -28,7 +29,7 @@ return {
       },
     })
 
-    -- minifiles
+    --[[ minifiles
     local minifiles_toggle = function(...)
       if not MiniFiles.close() then
         MiniFiles.open(...)
@@ -36,7 +37,7 @@ return {
     end
     require('mini.files').setup({
       vim.keymap.set('n', '-', minifiles_toggle, { desc = "Toggle Minifiles" })
-    })
+    })]]
 
     -- trim with backspace
     vim.keymap.set("n", "<BS>", ":lua MiniTrailspace.trim()<CR>")
@@ -52,6 +53,7 @@ return {
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
         ]],
       footer = os.date(),
+      query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_.',
       items = {
         starter.sections.pick(),
         starter.sections.builtin_actions(),
