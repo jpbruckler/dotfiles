@@ -4,9 +4,9 @@ vim.opt.langmap = "+]ü["
 vim.keymap.set("n", "ü", "[", { remap = true })
 
 vim.opt.expandtab = true -- Convert tabs to spaces
-vim.opt.shiftwidth = 4 -- Amount to indent with << and >>
-vim.opt.tabstop = 4 -- How many spaces are shown per Tab
-vim.opt.softtabstop = 4 -- How many spaces are applied when pressing Tab
+vim.opt.shiftwidth = 4   -- Amount to indent with << and >>
+vim.opt.tabstop = 4      -- How many spaces are shown per Tab
+vim.opt.softtabstop = 4  -- How many spaces are applied when pressing Tab
 
 vim.opt.smarttab = true
 vim.opt.smartindent = true
@@ -51,3 +51,30 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
+-- Conceallevel for Obsidian.nvim
+vim.opt.conceallevel = 2
+
+-- In Windows, set the terminal shell to PowerShell
+-- In powershell profile include the following:
+--
+--  if ($env:VIMRUNTIME) {
+--    $PSStyle.OutputRendering = 'PlainText'
+--  }
+--
+-- Which will set the OutputRendering to PlainText
+-- when PowerShell is opened from neovim ($env:VIMRUNTIME
+-- does not normally exist as an environment variable)
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+if is_windows then
+  vim.o.shell = "pwsh"
+  vim.o.shellcmdflag = table.concat({
+    "-NoLogo",
+    "-NonInteractive",
+    "-ExecutionPolicy RemoteSigned",
+    "-Command",
+  }, " ")
+  vim.o.shellquote = ""
+  vim.o.shellxquote = ""
+  vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s"
+  vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s"
+end
