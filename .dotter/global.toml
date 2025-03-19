@@ -1,0 +1,11 @@
+[komorebi.files]
+"komorebi" = "~"
+
+[tmux.files]
+"tmux" = "~"
+
+[starship.files]
+"starship" = "~"
+
+[nvim.files]
+"nvim" = "~"
