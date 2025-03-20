@@ -5,7 +5,7 @@ return {
       { "williamboman/mason.nvim",                  opts = {} },
       { "williamboman/mason-lspconfig.nvim" },
       { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-      { "saghen/blink.cmp" },
+      --{ "saghen/blink.cmp" },
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -15,14 +15,29 @@ return {
           },
         },
       },
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/nvim-cmp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "j-hui/fidget.nvim",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
+      local cmp = require("cmp")
+      local cmp_lsp = require("cmp_nvim_lsp")
+      local capabilities =
+          vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+
+      require("fidget").setup({})
       local servers = require("plugins.lsp-config.servers")
       local mason = require("mason")
       local masonlsp = require("mason-lspconfig")
       local masonti = require("mason-tool-installer")
       local lspconfig = require("lspconfig")
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      --      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
