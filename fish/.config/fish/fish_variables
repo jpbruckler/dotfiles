@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export SSH_AGENT_PID:1822
-SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXo7DpjL/agent\x2e1821
+SETUVAR --export SSH_AGENT_PID:1812
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXHozgRW/agent\x2e1811
 SETUVAR SSH_KEYS_TO_AUTOLOAD:/home/bitrang3r/\x2essh/id_github
 SETUVAR XDG_CONFIG_HOME:/home/bitrang3r/\x2econfig
 SETUVAR __fish_initialized:3800
