@@ -88,7 +88,6 @@ return {
       icons = true,
       indentscope = true,
       notify = true,
-      pick = true,
       statusline = {
         use_icons = true,
         set_vim_settings = true,
