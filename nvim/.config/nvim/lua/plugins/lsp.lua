@@ -2,10 +2,13 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason.nvim", opts = {} },
+      { "saghen/blink.cmp" },
+      { "williamboman/mason.nvim",                  config = true },
       { "williamboman/mason-lspconfig.nvim" },
       { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-      --{ "saghen/blink.cmp" },
+      { "L3MON4D3/LuaSnip" },
+      { "j-hui/fidget.nvim" },
+      { "rafamadriz/friendly-snippets" },
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -15,34 +18,17 @@ return {
           },
         },
       },
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/nvim-cmp",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "j-hui/fidget.nvim",
-      "rafamadriz/friendly-snippets",
     },
     config = function()
-      local cmp = require("cmp")
-      local cmp_lsp = require("cmp_nvim_lsp")
-      local capabilities =
-        vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
-
       require("fidget").setup({})
-      local servers = require("plugins.lsp-config.servers")
+      local lspconfig = require("lspconfig")
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      local servers = require("plugins.lspconfig.servers")
       local mason = require("mason")
       local masonlsp = require("mason-lspconfig")
       local masonti = require("mason-tool-installer")
-      local lspconfig = require("lspconfig")
-      --      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      --  This function gets run when an LSP attaches to a particular buffer.
-      --    That is to say, every time a new file is opened that is associated with
-      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
@@ -94,10 +80,6 @@ return {
           map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
-          ---@return boolean
           local function client_supports_method(client, method, bufnr)
             if vim.fn.has("nvim-0.11") == 1 then
               return client:supports_method(method, bufnr)
@@ -113,8 +95,8 @@ return {
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if
-            client
-            and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+              client
+              and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
           then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -151,28 +133,6 @@ return {
       })
 
       require("luasnip.loaders.from_vscode").lazy_load()
-
-      local cmp_select = { behavior = cmp.SelectBehavior.Replace }
-
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { "i" }),
-          ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { "i" }),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
-        }),
-      })
 
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
@@ -246,4 +206,6 @@ return {
       })
     end,
   },
+
+
 }

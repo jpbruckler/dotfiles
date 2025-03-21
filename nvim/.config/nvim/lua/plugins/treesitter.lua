@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  config = function()
+  config = function ()
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
@@ -12,11 +12,11 @@ return {
         "vimdoc",
         "query",
         "javascript",
-        "json",
         "html",
         "markdown",
         "markdown_inline",
         "powershell",
+        "rust"
       },
       auto_install = true,
       sync_install = false,
@@ -33,10 +33,5 @@ return {
         },
       },
     })
-
-    local ts_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    ts_parser_config.powershell = {
-      filetype = { "ps1", "psm1", "psd1" },
-    }
-  end,
+  end
 }
