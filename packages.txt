@@ -1,0 +1,28 @@
+# --------------------------------------------------- // Utils
+bat                                                     # a better cat
+fzf                                                     # fuzzily find
+fd                                                      # alternative to find
+eza                                                     # way better ls
+fastfetch                                               # terminal showoff
+bind                                                    # dns cli
+
+# --------------------------------------------------- // Applications
+firefox                                                 # browser
+ghostty                                                 # terminal
+fish                                                    # a shell for the 90s
+aur:librewolf-bin                                       # browser
+aur:powershell                                          # shell
+aur:zotero-bin                                          # references
+keycbain
+
+# --------------------------------------------------- // Dev
+aur:neovim-nightly-bin                                  # editor
+aur:git-credential-manager                              # git
+aur:git-credential-manager-extras                       # moar git
+clang
+lua
+luarocks
+
+
+
+
