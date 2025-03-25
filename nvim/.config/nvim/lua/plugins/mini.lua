@@ -15,9 +15,11 @@ local function starter_header()
   local pad = math.floor((width - #datetime) / 2)
   local centered = string.rep(" ", pad) .. datetime
 
-  local box_top = "╭────────────────────────────────────────────────╮"
+  local box_top =
+  "╭────────────────────────────────────────────────╮"
   local box_middle = string.format("│%s│", centered .. string.rep(" ", width - #centered))
-  local box_bottom = "╰────────────────────────────────────────────────╯"
+  local box_bottom =
+  "╰────────────────────────────────────────────────╯"
 
   table.insert(logo, box_top)
   table.insert(logo, box_middle)
@@ -27,55 +29,14 @@ local function starter_header()
 end
 
 return {
-  'echasnovski/mini.nvim',
+  "echasnovski/mini.nvim",
   version = false,
   config = function()
     local mini_specs = {
-      ai = {
-        custom_textobjects = {
-          -- some extra motions for PowerShell
-          -- Scriptblock or any `{}` block
-          B = {
-            a = { "%b{}", "^.().*().$" },
-            i = { "%b{}", "^.{().*()}$" },
-          },
-
-          -- Hashtable: @{ key = value }
-          h = {
-            a = { "@%b{}", "^.().*().$" },
-            i = { "@%b{}", "^.@{().*()}$" },
-          },
-
-          -- Array: @()
-          a = {
-            a = { "@%b()", "^.().*().$" },
-            i = { "@%b()", "^.@%(().*())$" },
-          },
-
-          -- String in quotes
-          q = {
-            a = { [["[^"]*"]], '^.().*().$' },
-            i = { [["[^"]*"]], '^."().*"()$' },
-          },
-          f = { -- Function names
-            a = { "%f[%w]function%s+[%w%-_]+", "()function%s+()[%w%-_]+" },
-            i = { "%f[%w]function%s+[%w%-_]+", "function%s+()([%w%-_]+)()" },
-          },
-
-          p = { -- Pipelines
-            a = { [[[%w\-]+\s+|[%w\-]+\s*\{.-\}]], '()%f[%w].-()%s*|' },
-            i = { [[[%w\-]+\s+|[%w\-]+\s*\{.-\}]], [[|%s*()([%w\-]+.-)()]] },
-          },
-
-          s = { -- Here-strings
-            a = { [[@".-."@]], '()@".-."@()' },
-            i = { [[@".-."@]], '@()"().-"()@' },
-          },
-        }
-      },
+      ai = true,
       basics = {
         options = {
-          extra_ui = true
+          extra_ui = true,
         },
         mappings = {
           windows = true,
@@ -103,10 +64,13 @@ return {
           { action = "lua require('fzf-lua').oldfiles()", name = "  Recent files", section = "Files" },
           { action = "lua require('fzf-lua').live_grep()", name = "󰱽  Grep text", section = "Files" },
 
-          -- Projects / sessions (you can wire this to zoxide or persisted)
           { action = "lua require('fzf-lua').dirs()", name = "󰈢  Projects", section = "Workspace" },
           -- Replace this with your session manager if you use one
-          { action = "lua vim.notify('Session loading not configured')", name = "  Restore Session", section = "Workspace" },
+          {
+            action = "lua vim.notify('Session loading not configured')",
+            name = "  Restore Session",
+            section = "Workspace",
+          },
 
           -- Notes / writing (Obsidian)
           { action = "ObsidianQuickSwitch", name = "  Open Obsidian Note", section = "Notes" },
@@ -132,9 +96,9 @@ return {
       },
       surround = {
         mappings = {
-          add = 'gsa',
-          delete = 'gsd',
-          replace = 'gsr',
+          add = "gsa",
+          delete = "gsd",
+          replace = "gsr",
         },
       },
     }
@@ -143,7 +107,7 @@ return {
       if opts == true then
         opts = {}
       end
-      require('mini.' .. spec).setup(opts)
+      require("mini." .. spec).setup(opts)
     end
   end,
 }
