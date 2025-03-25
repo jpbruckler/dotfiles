@@ -28,19 +28,19 @@
         {
             "workspaces": [
                 {
-                    "name": "1",
+                    "name": "Home",
                     "layout": "BSP"
                 },
                 {
-                    "name": "2",
+                    "name": "Ops",
                     "layout": "BSP"
                 },
                 {
-                    "name": "3",
+                    "name": "Dev",
                     "layout": "BSP"
                 },
                 {
-                    "name": "4",
+                    "name": "Remote",
                     "layout": "BSP"
                 },
                 {

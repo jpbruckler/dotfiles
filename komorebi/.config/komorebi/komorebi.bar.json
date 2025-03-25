@@ -24,7 +24,20 @@
         {
             "Time": {
                 "enable": true,
-                "format": "TwentyFourHour"
+                "format": {
+                    "Custom": "%T %Z"
+                },
+                "timezone": "UTC",
+            }
+        },
+        {
+            "Time": {
+                "enable": true,
+                "format": {
+                    "Custom": "%T %Z"
+                },
+                "timezone": "America/Detroit",
+                "label_prefix": "Icon"
             }
         }
     ],
