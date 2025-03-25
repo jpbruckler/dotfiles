@@ -1,6 +1,8 @@
 return {
   marksman = {},
   lua_ls = {},
+  rust_analyzer = {},
+  ts_ls = {},
   powershell_es = {
     filetypes = { "ps1", "psm1", "psd1" },
     bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
