@@ -21,8 +21,14 @@ return {
       appearance = {
         nerd_font_variant = "mono",
       },
+      completion = {
+        documentation = {
+          auto_show = true,
+        },
+      },
+      signature = { enabled = true },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "emoji", "cmdline", "omni" },
+        default = { "lsp", "path", "snippets", "buffer", "emoji", "cmdline", "omni", "lazydev" },
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -37,6 +43,12 @@ return {
                 vim.o.filetype
               )
             end,
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
           },
         },
       },
