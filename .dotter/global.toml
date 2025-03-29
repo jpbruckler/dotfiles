@@ -1,3 +1,6 @@
+[helpers]
+color_rgb = ".dotter/helpers/color_rgb.rhai"
+
 [komorebi.files]
 "komorebi" = "~"
 

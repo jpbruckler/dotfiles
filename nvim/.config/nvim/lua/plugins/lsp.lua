@@ -22,7 +22,8 @@ return {
     config = function()
       require("fidget").setup({})
       local lspconfig = require("lspconfig")
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local original_capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
 
       local servers = require("plugins.lspconfig.servers")
       local mason = require("mason")
