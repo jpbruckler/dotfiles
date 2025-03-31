@@ -12,3 +12,6 @@ color_rgb = ".dotter/helpers/color_rgb.rhai"
 
 [nvim.files]
 "nvim" = "~"
+
+[lazygit.files]
+"lazygit" = { target = "~", type = "symbolic" }

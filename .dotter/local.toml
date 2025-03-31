@@ -2,6 +2,7 @@ packages = [
     "komorebi",
     "starship",
     "nvim",
+    "lazygit"
 ]
 
 [files]
