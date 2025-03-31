@@ -11,6 +11,9 @@ if status is-interactive
 
 end
 
+set -gx VISUAL nvim
+set -gx EDITOR $VISUAL
+
 # neovim
 alias e nvim
 alias v nvim
