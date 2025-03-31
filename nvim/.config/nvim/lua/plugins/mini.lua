@@ -45,13 +45,63 @@ return {
       },
       comment = true,
       extra = true,
-      hipatterns = true,
+      git = true,
+      hipatterns = {
+        -- Highlight standalone 'FIX', 'FIXME', 'HACK', 'TODO', 'NOTE'
+        fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+        fix = { pattern = "%f[%w]()FIX()%f[%W]", group = "MiniHipatternsFixme" },
+        hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+        todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+        note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+        -- Highlight hex color strings (`#rrggbb`) using that color
+        -- #992233, #229933, #223399
+        hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
+
+        trailspace = {
+          pattern = "%f[%s]%s*$",
+          group = require("mini.hipatterns").compute_hex_color_group("#747070", "bg"),
+        },
+      },
       icons = true,
       indentscope = true,
       notify = true,
+      sessions = true,
       statusline = {
         use_icons = true,
         set_vim_settings = true,
+        content = {
+          active = function()
+            local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 1024 })
+            local git = MiniStatusline.section_git({ trunc_width = 75 })
+            local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+            local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+            local lsp = MiniStatusline.section_lsp({ trunc_width = 75 }) -- Shows number of attached lsp servers
+            local filename = MiniStatusline.section_filename({ trunc_width = 100 })
+            local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+            local location = MiniStatusline.section_location({ trunc_width = 75 })
+            local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+            return MiniStatusline.combine_groups({
+              { hl = mode_hl,                 strings = { mode } },
+              { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+              "%<", -- Mark general truncate point
+              { hl = "MiniStatuslineFilename",    strings = { filename } },
+              "%=", -- End left alignment
+              { hl = "MiniStatuslineModeReplace", strings = { search } },
+              { hl = "MiniStatuslineFileinfo",    strings = { fileinfo } },
+              { hl = mode_hl,                     strings = { location } },
+              -- { hl = mode_hl, strings = { "%l:%c%V %P 0x%B" } }, -- remove '0x%B', use :ascii
+            })
+          end,
+
+          inactive = function()
+            local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+            return MiniStatusline.combine_groups({
+              { hl = "MiniStatuslineDevinfo", strings = { filename } },
+            })
+          end,
+        },
       },
       trailspace = true,
       move = true,
@@ -60,29 +110,22 @@ return {
         header = starter_header(),
         items = {
           -- File access
-          { action = "lua require('fzf-lua').files()", name = "  Find file", section = "Files" },
-          { action = "lua require('fzf-lua').oldfiles()", name = "  Recent files", section = "Files" },
-          { action = "lua require('fzf-lua').live_grep()", name = "󰱽  Grep text", section = "Files" },
-
-          { action = "lua require('fzf-lua').dirs()", name = "󰈢  Projects", section = "Workspace" },
-          -- Replace this with your session manager if you use one
-          {
-            action = "lua vim.notify('Session loading not configured')",
-            name = "  Restore Session",
-            section = "Workspace",
-          },
-
-          -- Notes / writing (Obsidian)
-          { action = "ObsidianQuickSwitch", name = "  Open Obsidian Note", section = "Notes" },
-          { action = "ObsidianNew", name = "  New Note", section = "Notes" },
+          { action = "lua require('fzf-lua').files()", name = "FF -   Find file", section = "Files" },
+          { action = "lua require('fzf-lua').oldfiles()", name = "RF -   Recent files", section = "Files" },
+          { action = "lua require('fzf-lua').live_grep()", name = "GG - 󰱽  Grep text", section = "Files" },
 
           -- Terminal / Dev tools
-          { action = "ToggleTerm direction=horizontal", name = "  Open Terminal", section = "Tools" },
-          { action = "Lazy", name = "󰒲  Plugin Manager", section = "Tools" },
+          { action = "ToggleTerm direction=horizontal", name = "TT -   Open Terminal", section = "Tools" },
+          { action = "Lazy", name = "LZ - 󰒲  Plugin Manager", section = "Tools" },
+          { action = "Mason", name = "MM - 󰣪 Mason", section = "Tools" },
+          { action = "LazyGit", name = "LG - 󰊢 LazyGit", section = "Tools" },
 
           -- Config
-          { action = "e $MYVIMRC", name = "  Edit config", section = "Config" },
-          { action = "source $MYVIMRC", name = "󰛶  Reload config", section = "Config" },
+          { action = "e $MYVIMRC", name = "EC -   Edit config", section = "Config" },
+          { action = "source $MYVIMRC", name = "RC - 󰛶  Reload config", section = "Config" },
+
+          -- Sessions
+          require("mini.starter").sections.sessions(3, true),
         },
         footer = function()
           local stats = require("lazy").stats()
