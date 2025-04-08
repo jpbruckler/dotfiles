@@ -2,7 +2,8 @@ packages = [
     "komorebi",
     "starship",
     "nvim",
-    "lazygit"
+    "lazygit",
+    "pwsh"
 ]
 
 [files]

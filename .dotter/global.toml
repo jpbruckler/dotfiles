@@ -15,3 +15,6 @@ color_rgb = ".dotter/helpers/color_rgb.rhai"
 
 [lazygit.files]
 "lazygit" = { target = "~", type = "symbolic" }
+
+[pwsh.files]
+"powershell" = { target = "~", type = "symbolic" }
