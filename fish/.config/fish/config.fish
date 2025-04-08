@@ -60,3 +60,9 @@ alias whois "grc whois" # colorized whois
 alias hostfile 'eval sudo $EDITOR /etc/hosts'
 alias editssh 'eval $EDITOR ~/.ssh'
 alias lssh 'grep -w -i Host ~/.ssh/config | sed s/Host//'
+
+# Created by `pipx` on 2025-04-08 12:15:05
+set PATH $PATH /home/bitrang3r/dotfiles/fonts/.local/bin
+
+# Created by `pipx` on 2025-04-08 12:17:39
+set PATH $PATH /home/bitrang3r/.local/bin
