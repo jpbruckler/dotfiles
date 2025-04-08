@@ -2,3 +2,4 @@ fonts/.local/share
 fonts/.local/state
 tmux/.config/tmux/plugins
 cache.toml
+fish_variables
