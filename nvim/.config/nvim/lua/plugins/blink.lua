@@ -66,7 +66,7 @@ return {
         },
 
         prebuilt_binaries = {
-          download = false,
+          download = true,
           ignore_version_mismatch = false,
           force_version = nil,
           force_system_triple = nil,
