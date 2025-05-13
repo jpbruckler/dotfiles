@@ -1,6 +1,8 @@
 return {
+  ansiblels = {},
   marksman = {},
   lua_ls = {},
+  bicep = {},
   rust_analyzer = {},
   ts_ls = {
     root_dir = require("lspconfig.util").root_pattern("package.json"),
