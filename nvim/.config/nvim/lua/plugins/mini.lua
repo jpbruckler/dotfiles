@@ -110,6 +110,7 @@ return {
         header = starter_header(),
         items = {
           -- File access
+          { action = "enew", name = "E - New scratch file", section = "Files" },
           { action = "lua require('fzf-lua').files()", name = "F -   Find file", section = "Files" },
           { action = "lua require('fzf-lua').oldfiles()", name = "H -   File History", section = "Files" },
           {
