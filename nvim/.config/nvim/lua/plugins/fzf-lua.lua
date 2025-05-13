@@ -7,6 +7,20 @@ return {
   opts = {},
   keys = {
     {
+      "<leader>ql",
+      function()
+        require("fzf-lua").quickfix()
+      end,
+      desc = "[Q]uickfix [L]ist",
+    },
+    {
+      "<leader>qs",
+      function()
+        require("fzf-lua").quickfix_stack()
+      end,
+      desc = "[Q]uickfix [S]tack",
+    },
+    {
       "<leader>fb",
       function()
         require("fzf-lua").builtin()
@@ -19,6 +33,13 @@ return {
         require("fzf-lua").buffers()
       end,
       desc = "[S]earch existing [B]uffers",
+    },
+    {
+      "<leader>sq",
+      function()
+        require("fzf-lua").grep_quickfix()
+      end,
+      desc = "[S]earch [Q]uickfix list",
     },
     {
       "<leader>sc",
