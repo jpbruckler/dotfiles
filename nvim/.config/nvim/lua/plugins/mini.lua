@@ -110,19 +110,24 @@ return {
         header = starter_header(),
         items = {
           -- File access
-          { action = "lua require('fzf-lua').files()", name = "FF -   Find file", section = "Files" },
-          { action = "lua require('fzf-lua').oldfiles()", name = "RF -   Recent files", section = "Files" },
-          { action = "lua require('fzf-lua').live_grep()", name = "GG - 󰱽  Grep text", section = "Files" },
+          { action = "lua require('fzf-lua').files()", name = "F -   Find file", section = "Files" },
+          { action = "lua require('fzf-lua').oldfiles()", name = "H -   File History", section = "Files" },
+          {
+            action = "lua require('fzf-lua').live_grep()",
+            name = "L - 󰱽  Live Grep current Directory",
+            section = "Files",
+          },
+          { action = "Oil", name = "O - Open Oil", section = "Files" },
 
           -- Terminal / Dev tools
-          { action = "ToggleTerm direction=horizontal", name = "TT -   Open Terminal", section = "Tools" },
-          { action = "Lazy", name = "LZ - 󰒲  Plugin Manager", section = "Tools" },
-          { action = "Mason", name = "MM - 󰣪 Mason", section = "Tools" },
-          { action = "LazyGit", name = "LG - 󰊢 LazyGit", section = "Tools" },
+          { action = "ToggleTerm direction=horizontal", name = "T -   Open Terminal", section = "Tools" },
+          { action = "Lazy", name = "Z - 󰒲  Lazy Plugin Manager", section = "Tools" },
+          { action = "Mason", name = "M - 󰣪 Mason", section = "Tools" },
+          { action = "LazyGit", name = "G - 󰊢 LazyGit", section = "Tools" },
 
           -- Config
-          { action = "e $MYVIMRC", name = "EC -   Edit config", section = "Config" },
-          { action = "source $MYVIMRC", name = "RC - 󰛶  Reload config", section = "Config" },
+          { action = "e $MYVIMRC", name = "C -   Edit config", section = "Config" },
+          { action = "source $MYVIMRC", name = "R - 󰛶  Reload config", section = "Config" },
 
           -- Sessions
           require("mini.starter").sections.sessions(3, true),
