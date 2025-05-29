@@ -1,4 +1,0 @@
-{
-    "Microsoft.PowerShell:ExecutionPolicy":"RemoteSigned",
-    "PSModulePath": "%LOCALAPPDATA%\\PowerShell\\Modules"
-}

@@ -1,0 +1,53 @@
+
+# fzf aliases {{{
+alias ffe='_fuzzy_edit_search_file'
+alias ffcd='_fuzzy_change_directory'
+alias ffec='_fuzzy_edit_search_file_content'
+# }}}
+
+# common commands {{{
+alias rm='rm -Ivr'
+alias mkdir="mkdir -pv"
+alias mv="mv -iv"
+alias cp="cp -rv"
+alias scp="scp -r"
+alias df="df -h"
+alias du="du -h"
+alias rsync="rsync -uPrv"
+alias dd="dd status=progress"
+alias la=tree
+alias cat=bat
+# }}}
+
+# Git {{{
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gp="git push origin HEAD"
+alias gpu="git pull origin"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
+alias gco="git checkout"
+alias gb='git branch'
+alias gba='git branch -a'
+alias gadd='git add'
+alias ga='git add -p'
+alias gcoall='git checkout -- .'
+alias gr='git remote'
+alias gre='git reset'
+# }}}
+
+# cd shortcuts {{{
+alias ..="cd .."
+alias ...="cd ../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+alias .5="cd ../../../../.."
+# }}}
+
+alias nmap='nmap -sC -sV -oN nmap'
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+alias ltree="eza --tree --level=2  --icons --git"
+
+# vim:foldmethod=marker

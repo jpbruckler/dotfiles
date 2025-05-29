@@ -1,9 +1,0 @@
-packages = [
-    "komorebi",
-    "starship",
-    "nvim",
-    "lazygit",
-    "pwsh"
-]
-
-[files]
